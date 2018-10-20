@@ -14,6 +14,46 @@
     <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/bundy/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/main.css">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBGwLgCleUFASVZWP-o0fYfpZWylxJ7Lo&callback=initMap" type="text/javascript"></script>
+    <script type="text/javascript">
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 37.888, lng: -96.370},
+            zoom: 4
+        });
+        var data = /*get the data here*/;
+        var gray_set = [];
+        var red_set = [];
+        var orange_set = [];
+        var yellow_set = [];
+        var green_set = [];
+        var forest_set = [];
+        for(var node in data)
+        {
+            var latitude = node.latitude;
+            var latitude = node.latitude;
+            var year = node.date;
+            var amount = parseFloat(node.nitrates);
+            if(parseInt(year) === parseInt(document.getElementById("year-select").value))
+            {
+                if(amount >= 37)
+                {
+                    
+                }
+                else if(amount >= 28)
+                {
+                    
+                }
+                else if(amount >= 19)
+                {
+                    
+                }
+                else if(amount >= 10)
+                {
+                    
+                }
+                else if(amount >= 1)
+            }
+        }
+    </script>  
     <title>EnviroMAP</title>
   </head>
   <body>
@@ -45,6 +85,9 @@
         </div>
         <br/>
         <div id="content">
+          <select name="year-select" id="year-select" title="Select year...">
+              <option value="1990">1990</option>
+          </select>  
           <div id="map">
           </div>
           <br/><br/>
