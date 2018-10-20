@@ -13,6 +13,7 @@ j_data = df_ndata.to_json('nitrate_place_data.json', orient='records')
 #     import argparse
 #
 #     parser = argparse.ArgumentParser(
-#         description='get data from map to return nitrate data')
 #     parser.add_argument('year', type=int, help='year')
 
+
+#         description='get data from map to return nitrate data')
