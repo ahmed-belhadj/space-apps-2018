@@ -49,7 +49,7 @@
             </div>
         </header>
         <h1 id="map-title" class="left-indent">Nitrate Concentration Map</h1>
-        <span class="left-indent">Sample Year: <select name="year-select" id="year-select" title="Select year..." onchange="initMap()">
+        <span class="left-indent">Sample Year: <select name="year-select" id="year-select" title="Select year..." onchange="initMap()" multiple>
             <option value="1995">1995</option>
             <option value="1996">1996</option>
             <option value="1997">1997</option>
@@ -112,7 +112,7 @@
                     let year = node.measured_on;
                     let amount = parseFloat(node["nitrates:nitrate and nitrite (mgl)"]);
                     let image;
-                    if (parseInt(year) == parseInt(document.getElementById("year-select").value)) {
+                    if (document.getElementById("year-select").selectedOptions.indexOf(parseInt(year)) != -1) {
                     if (amount >= 10) {
                         image = "./images/markers/red_square.jpg";
                     }
