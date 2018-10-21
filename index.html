@@ -114,7 +114,15 @@
                 let year = node.measured_on;
                 let amount = parseFloat(node["nitrates:nitrate and nitrite (mgl)"]);
                 let image;
-                if (document.getElementById("year-select").selectedOptions.indexOf(parseInt(year)) != -1) {
+                let selected = document.getElementById("year-select").selectedOptions;
+                let found = false;
+                for (let j = 0; j < selected.length; j++) {
+                    if (selected[j].value == year) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
                     if (amount >= 10) {
                         image = "./images/markers/red_square.jpg";
                     }
