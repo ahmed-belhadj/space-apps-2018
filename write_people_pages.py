@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+
+# write code for each type of user's page
+
+import pandas as pd
+url_file = 'resources_for_user.csv'
+page_start = """<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="./css/bundy/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="./css/main.css">
 
-    <title>EnviroMAP - About Our App</title>
+    <title>EnviroMAP - Take Action - Citizen Scientist</title>
 </head>
 <body>
 <noscript>
@@ -47,15 +53,27 @@
         </a>
     </div>
 </header>
-<h1 id="map-title" class="left-indent">About Our Project</h1>
-Our team includes:
-<h1 id="map-title" class="left-indent">Future Development</h1>
-Comparisons between the United States' subsidized nitrogenous fertilizer use and that of countries with more efficient farming practices would best be explored in the context of a scientific paper. However, once such a paper is written, its conclusions and charts would be a welcome part of this app.
+"""
+heading_s = '<h1 id="map-title" class="left-indent">'
+heading_e = '</h1>\n<table id="news-table">'
+list_item_s = """<tr class="news-row">
+        <td class="news-data">
+            """
+list_item_e = """
+        </td>
+    </tr>"""
+page_end = """</table>
 <script>
+    document.getElementById("action-icon").style.backgroundColor = "#d8ffcc";
     document.getElementById("map-icon").style.backgroundColor = "#FFE571";
-    document.getElementById("action-icon").style.backgroundColor = "#FFE571";
     document.getElementById("news-icon").style.backgroundColor = "#FFE571";
-    document.getElementById("about-icon").style.backgroundColor = "#d8ffcc";
+    document.getElementById("about-icon").style.backgroundColor = "#FFE571";
 </script>
 </body>
-</html>
+</html>"""
+
+page = '{}'.format(page_start)
+df = df_ndata = pd.read_csv(globe_file, sep=',')
+for user in df['User'].values:
+    page[user]='page'
+
