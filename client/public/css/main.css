@@ -58,6 +58,34 @@ body
     color: #4d2600;
 }
 
+#i-am-a
+{
+    margin-right: 10%;
+}
+
+#content
+{
+    text-align: center;
+}
+
+.action-button
+{
+    font-size: 20px;
+    padding: 15px;
+    border: none;
+    color: #d8ffcc;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px;
+    background-color: #4d2600;
+    font-family: 'Bundy', Arial, sans-serif;
+}
+
+.action-button:hover
+{
+    cursor: pointer;
+}
+
 .left-indent
 {
     margin-left: 10%;

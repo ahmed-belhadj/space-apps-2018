@@ -11,7 +11,7 @@
             <link rel="stylesheet" type="text/css" href="./css/bundy/stylesheet.css">
             <link rel="stylesheet" type="text/css" href="./css/main.css">
     
-            <title>EnviroMAP</title>
+            <title>EnviroMAP - Home</title>
     </head>
     <body>
         <noscript>
@@ -25,15 +25,21 @@
             <!--Icons from flaticon.com-->
             <!--Author: Freepik-->
             <div id="news-icon" class="header-icon">
+                <a href="news.html">
                 <img src="./images/newspaper-folded.png" alt="News icon" height="45px"/>
+                </a>
             </div>
             <!--Author: Tomas Knop-->
             <div id="action-icon" class="header-icon">
-                <img src="./images/handshake.png" alt="Action icon" height="45px"/>
+                <a href="action.html">
+                    <img src="./images/handshake.png" alt="Action icon" height="45px"/>
+                </a>
             </div>
             <!--Author: Smashicons-->
             <div id="map-icon" class="header-icon">
-                <img src="./images/map-location.png" alt="Map icon" height="45px"/>
+                <a href="index.html">
+                    <img src="./images/map-location.png" alt="Map icon" height="45px"/>
+                </a>
             </div>
         </header>
         <h1 id="map-title" class="left-indent">Nitrate Concentration Map</h1>
@@ -81,6 +87,9 @@
         <br />
         <script type="text/javascript" src="../data.js"></script>
         <script>
+            document.getElementById("map-icon").style.backgroundColor = "#d8ffcc";
+            document.getElementById("action-icon").style.backgroundColor = "white";
+            document.getElementById("news-icon").style.backgroundColor = "white";
             let map;
             function initMap() {
                 document.getElementById("location").innerText = "Select a point...";
