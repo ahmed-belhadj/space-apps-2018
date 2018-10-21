@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="utf-8">
+            <link rel="shortcut icon" href="./favicon.ico">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="theme-color" content="#000000">
+            <link rel="manifest" href="./manifest.json">
+            <link rel="stylesheet" type="text/css" href="./css/beepo/stylesheet.css">
+            <link rel="stylesheet" type="text/css" href="./css/bundy/stylesheet.css">
+            <link rel="stylesheet" type="text/css" href="./css/main.css">
+    
+            <title>EnviroMAP - Home</title>
+    </head>
+    <body>
+        <noscript>
+            You need to enable JavaScript to run this app.
+        </noscript>
+        <!--<div id="root">-->
+        <header class="left-indent">
+            <div id="logo">
+                <img src="./images/enviroculture_logo.png" alt="Header logo" height="50px"/>
+            </div>
+            <!--Icons from flaticon.com-->
+            <!--Author: Freepik-->
+            <div id="news-icon" class="header-icon">
+                <a href="news.html">
+                <img src="./images/newspaper-folded.png" alt="News icon" height="45px"/>
+                </a>
+            </div>
+            <!--Author: Tomas Knop-->
+            <div id="action-icon" class="header-icon">
+                <a href="action.html">
+                    <img src="./images/handshake.png" alt="Action icon" height="45px"/>
+                </a>
+            </div>
+            <!--Author: Smashicons-->
+            <div id="map-icon" class="header-icon">
+                <a href="index.html">
+                    <img src="./images/map-location.png" alt="Map icon" height="45px"/>
+                </a>
+            </div>
+        </header>
+        <h1 id="map-title" class="left-indent">Nitrate Concentration Map</h1>
+        <span class="left-indent">Sample Year: <select name="year-select" id="year-select" title="Select year..." onchange="initMap()">
+            <option value="1995">1995</option>
+            <option value="1996">1996</option>
+            <option value="1997">1997</option>
+            <option value="1998">1998</option>
+            <option value="1999">1999</option>
+            <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+        </select></span>
+        <br/><br/>
+        <div id="map" class="left-indent"></div>
+        <div id="color-guide" class="left-indent"><small>
+            Low Concentration &nbsp;<img src="./images/markers/forest_square.jpg" alt="dark green"/>
+            <img src="./images/markers/green_square.jpg" alt="light green"/>
+            <img src="./images/markers/yellow_square.jpg" alt="yellow"/>
+            <img src="./images/markers/orange_square.jpg" alt="orange"/>
+            <img src="./images/markers/red_square.jpg" alt="red"/>&nbsp; High Concentration</small>
+        </div>
+        <br/>
+        <div id="info-box" class="left-indent">
+            Sample Location: <span id="location">Select a point...</span><br/>
+            Nitrate Concentration (mgl): <span id="concentration">Select a point...</span>
+        </div>
+        <!--</div>-->
+        <br />
+        <script type="text/javascript" src="../data.js"></script>
+        <script>
+            document.getElementById("map-icon").style.backgroundColor = "#d8ffcc";
+            document.getElementById("action-icon").style.backgroundColor = "white";
+            document.getElementById("news-icon").style.backgroundColor = "white";
+            let map;
+            function initMap() {
+                document.getElementById("location").innerText = "Select a point...";
+                document.getElementById("concentration").innerText = "Select a point...";
+                    map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 37.888, lng: -96.370},
+                    zoom: 3
+                });
+                for (let i = 0; i < data.length; i++) {
+                    let node = data[i];
+                    let latitude = +parseFloat(node.latitude).toFixed(3);
+                    let longitude = +parseFloat(node.longitude).toFixed(3);
+                    let year = node.measured_on;
+                    let amount = parseFloat(node["nitrates:nitrate and nitrite (mgl)"]);
+                    let image;
+                    if (parseInt(year) == parseInt(document.getElementById("year-select").value)) {
+                    if (amount >= 10) {
+                        image = "./images/markers/red_square.jpg";
+                    }
+                    else if (amount >= 1) {
+                        image = "./images/markers/orange_square.jpg";
+                    }
+                    else if (amount >= 0.5) {
+                        image = "./images/markers/yellow_square.jpg";
+                    }
+                    else if (amount >= 0.2) {
+                        image = "./images/markers/green_square.jpg";
+                    }
+                    else {
+                        image = "./images/markers/forest_square.jpg";
+                    }
+                    let marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(latitude, longitude),
+                        icon: image,
+                        map: map
+                    });
+                    
+                    marker['nitrates'] = amount;
+                    
+                    marker.addListener('click', function(e){
+                        document.getElementById("concentration").innerText = marker.nitrates;
+                        
+                        var latlng = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
+                        var geocoder = geocoder = new google.maps.Geocoder();
+                        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                if (results[1]) {
+                                    document.getElementById("location").innerText = results[1].formatted_address;
+                                }
+                            }
+                        });
+                    });
+                    
+                    }
+                }
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBGwLgCleUFASVZWP-o0fYfpZWylxJ7Lo&callback=initMap"
+                async defer></script>
+    </body>
+</html>
