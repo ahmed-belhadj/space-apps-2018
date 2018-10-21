@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/beepo/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/bundy/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/main.css">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBGwLgCleUFASVZWP-o0fYfpZWylxJ7Lo&callback=initMap" type="text/javascript"></script>
+    <script type="text/javascript">
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 37.888, lng: -96.370},
+            zoom: 4
+        });
+        var data = /*get the data here*/;
+        var gray_set = [];
+        var red_set = [];
+        var orange_set = [];
+        var yellow_set = [];
+        var green_set = [];
+        var forest_set = [];
+        for(var node in data)
+        {
+            var latitude = node.latitude;
+            var latitude = node.latitude;
+            var year = node.date;
+            var amount = parseFloat(node.nitrates);
+            if(parseInt(year) === parseInt(document.getElementById("year-select").value))
+            {
+                if(amount >= 37)
+                {
+                    
+                }
+                else if(amount >= 28)
+                {
+                    
+                }
+                else if(amount >= 19)
+                {
+                    
+                }
+                else if(amount >= 10)
+                {
+                    
+                }
+                else if(amount >= 1)
+            }
+        }
+    </script>  
+    <title>EnviroMAP</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+      <header>
+        <div id="logo">
+          <img src="%PUBLIC_URL%/images/enviroculture_logo.png" alt="Header logo"/>
+        </div>
+        <!--Icons from flaticon.com-->
+        <!--Author: Smashicons-->
+        <div id="map-icon" class="header-icon">
+          <img src="%PUBLIC_URL%/images/map-location.png" alt="Map icon"/>
+        </div>
+        <!--Author: Tomas Knop-->
+        <div id="action-icon" class="header-icon">
+          <img src="%PUBLIC_URL%/images/handshake.png" alt="Action icon"/>
+        </div>
+        <!--Author: Freepik-->
+        <div id="news-icon" class="header-icon">
+          <img src="%PUBLIC_URL%/images/newspaper-folded.png" alt="News icon"/>
+        </div>
+      </header>
+      <div id="main-content">
+        <div id="title-zone">
+          <h1 id="map-title">Map</h1>
+        </div>
+        <br/>
+        <div id="content">
+          <select name="year-select" id="year-select" title="Select year...">
+              <option value="1990">1990</option>
+          </select>  
+          <div id="map">
+          </div>
+          <br/><br/>
+          <div id="info-box">
+            Latitude:  <span id="latitude">  </span><br/>
+            Longitude: <span id="longitude"> </span><br/>
+            Local laws:<span id="local-laws"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
