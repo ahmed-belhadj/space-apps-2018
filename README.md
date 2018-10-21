@@ -1,7 +1,6 @@
-# space-apps-2018
-## Enviroculture Mapper
-
-Nitrate pollution in the US visualized and put into hands of the public. 
+# Enviroculture Mapper
+## Space Apps 2018 Entry
+### Nitrate pollution in the US visualized and put into hands of the public. 
 
 Taking data from GLOBE in CSV format, converts it into JSON, which is then used by Django in Heroku which outputs to React. This shows a User Interface with a map.
 
