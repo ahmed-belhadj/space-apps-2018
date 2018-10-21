@@ -1,40 +1,231 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<html>
+<head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="./favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#000000">
+        <link rel="manifest" href="./manifest.json">
+        <link rel="stylesheet" type="text/css" href="./css/beepo/stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="./css/bundy/stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="./css/main.css">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+        <title>EnviroMAP</title>
+</head>
+<body>
+<!--<noscript>-->
+    <!--You need to enable JavaScript to run this app.-->
+<!--</noscript>-->
+<!--<div id="root">-->
+    <header>
+        <div id="logo">
+            <img src="./images/enviroculture_logo.png" alt="Header logo" height="50px"/>
+        </div>
+        <!--Icons from flaticon.com-->
+        <!--Author: Smashicons-->
+        <div id="map-icon" class="header-icon">
+            <img src="./images/map-location.png" alt="Map icon" height="50px"/>
+        </div>
+        <!--Author: Tomas Knop-->
+        <div id="action-icon" class="header-icon">
+            <img src="./images/handshake.png" alt="Action icon" height="50px"/>
+        </div>
+        <!--Author: Freepik-->
+        <div id="news-icon" class="header-icon">
+            <img src="./images/newspaper-folded.png" alt="News icon" height="50px"/>
+        </div>
+    </header>
+    <h1 id="map-title">Map</h1>
+    <br/>
+        <select name="year-select" id="year-select" title="Select year...">
+            <option value="1990">1990</option>
+            <option value="1991">1991</option>
+        </select>
+        <div id="map">
+        </div>
+        <br/><br/>
+        <div id="info-box">
+            Latitude:  <span id="latitude">  </span><br/>
+            Longitude: <span id="longitude"> </span><br/>
+            Local laws:<span id="local-laws"></span>
+        </div>
+<!--</div>-->
+<script>
+    let map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 37.888, lng: -96.370},
+            zoom: 4
+        });
+        //where the data comes from
+        let data = [
+            {
+                latitude: "34",
+                longitude: "-100",
+                date: "1990",
+                nitrates: "11"
+            },
+            {
+                latitude: "40",
+                longitude: "-90",
+                date: "1990",
+                nitrates: "0.3"
+            }];
+        for (var i = 0; i < data.length; i++) {
+            var node = data[i];
+            let latitude = parseInt(node.latitude);
+            let longitude = parseInt(node.longitude);
+            let year = node.date;
+            let amount = parseFloat(node.nitrates);
+            let image;
+            if (parseInt(year) === parseInt(document.getElementById("year-select").value)) {
+            //these will be changed
+            if (amount >= 10) {
+                image = "./images/markers/red_square.jpg";
+            }
+            else if (amount >= 1) {
+                image = "./images/markers/orange_square.jpg";
+            }
+            else if (amount >= 0.5) {
+                image = "./images/markers/yellow_square.jpg";
+            }
+            else if (amount >= 0.2) {
+                image = "./images/markers/green_square.jpg";
+            }
+            else {
+                image = "./images/markers/forest_square.jpg";
+            }
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(latitude, longitude),
+                icon: image,
+                map: map
+            });
+            
+            }
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBGwLgCleUFASVZWP-o0fYfpZWylxJ7Lo&callback=initMap"
+        async defer></script>
+</body>
 </html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+  <!--<head>-->
+    <!--<meta charset="utf-8">-->
+    <!--<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <!--<meta name="theme-color" content="#000000">-->
+    <!--<link rel="manifest" href="%PUBLIC_URL%/manifest.json">-->
+    <!--<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/beepo/stylesheet.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/bundy/stylesheet.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/main.css">-->
+    <!---->
+    <!--<title>EnviroMAP</title>-->
+  <!--</head>-->
+  <!--&lt;!&ndash;<body>&ndash;&gt;-->
+    <!--<noscript>-->
+      <!--You need to enable JavaScript to run this app.-->
+    <!--</noscript>-->
+    <!--<div id="root">-->
+      <!--<header>-->
+        <!--<div id="logo">-->
+          <!--<img src="%PUBLIC_URL%/images/enviroculture_logo.png" alt="Header logo"/>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Icons from flaticon.com&ndash;&gt;-->
+        <!--&lt;!&ndash;Author: Smashicons&ndash;&gt;-->
+        <!--<div id="map-icon" class="header-icon">-->
+          <!--<img src="%PUBLIC_URL%/images/map-location.png" alt="Map icon"/>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Author: Tomas Knop&ndash;&gt;-->
+        <!--<div id="action-icon" class="header-icon">-->
+          <!--<img src="%PUBLIC_URL%/images/handshake.png" alt="Action icon"/>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Author: Freepik&ndash;&gt;-->
+        <!--<div id="news-icon" class="header-icon">-->
+          <!--<img src="%PUBLIC_URL%/images/newspaper-folded.png" alt="News icon"/>-->
+        <!--</div>-->
+      <!--</header>-->
+      <!--<div id="main-content">-->
+        <!--<div id="title-zone">-->
+          <!--<h1 id="map-title">Map</h1>-->
+        <!--</div>-->
+        <!--<br/>-->
+        <!--<div id="content">-->
+          <!--<select name="year-select" id="year-select" title="Select year...">-->
+              <!--<option value="1990">1990</option>-->
+              <!--<option value="1991">1991</option>-->
+          <!--</select>  -->
+          <!--<div id="map">-->
+          <!--</div>-->
+          <!--<br/><br/>-->
+          <!--<div id="info-box">-->
+            <!--Latitude:  <span id="latitude">  </span><br/>-->
+            <!--Longitude: <span id="longitude"> </span><br/>-->
+            <!--Local laws:<span id="local-laws"></span>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBGwLgCleUFASVZWP-o0fYfpZWylxJ7Lo&callback=initMap" type="text/javascript" async defer></script>-->
+    <!--<script type="text/javascript">-->
+        <!--let map;-->
+        <!--function initMap() {-->
+            <!--console.log("Something happens");-->
+            <!--map = new google.maps.Map(document.getElementById('map'), {-->
+                <!--center: {lat: 37.888, lng: -96.370},-->
+                <!--zoom: 4-->
+            <!--});-->
+            <!--console.log(map);-->
+            <!--//where the data comes from-->
+            <!--let data = [-->
+                <!--{-->
+                    <!--latitude: "34",-->
+                    <!--longitude: "-100",-->
+                    <!--date: "1990",-->
+                    <!--nitrates: "11"-->
+                <!--},-->
+                <!--{-->
+                    <!--latitude: "40",-->
+                    <!--longitude: "-90",-->
+                    <!--date: "1990",-->
+                    <!--nitrates: "0.3"-->
+                <!--}];-->
+            <!--console.log(data);-->
+            <!--for (let node in data) {-->
+                <!--console.log("In loop");-->
+                <!--let latitude = parseInt(node.latitude);-->
+                <!--let longitude = parseInt(node.longitude);-->
+                <!--let year = node.date;-->
+                <!--let amount = parseFloat(node.nitrates);-->
+                <!--let image;-->
+                <!--// if (parseInt(year) === parseInt(document.getElementById("year-select").value)) {-->
+                <!--//these will be changed-->
+                <!--if (amount >= 10) {-->
+                    <!--image = "images/markers/red_square.jpg";-->
+                <!--}-->
+                <!--else if (amount >= 1) {-->
+                    <!--image = "images/markers/orange_square.jpg";-->
+                <!--}-->
+                <!--else if (amount >= 0.5) {-->
+                    <!--image = "images/markers/yellow_square.jpg";-->
+                <!--}-->
+                <!--else if (amount >= 0.2) {-->
+                    <!--image = "images/markers/green_square.jpg";-->
+                <!--}-->
+                <!--else {-->
+                    <!--image = "images/markers/forest_square.jpg";-->
+                <!--}-->
+                <!--let marker = new google.maps.Marker({-->
+                    <!--position: new google.maps.LatLng(latitude, longitude),-->
+                    <!--icon: image,-->
+                    <!--map: map-->
+                <!--});-->
+                <!--console.log(marker);-->
+                <!--//}-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+  <!--</body>-->
+<!--</html>-->
