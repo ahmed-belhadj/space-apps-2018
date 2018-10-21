@@ -51,6 +51,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%;
     font-family: 'Bundy', Arial, sans-serif;
 }
 
@@ -69,6 +70,12 @@ body
 #content
 {
     text-align: center;
+}
+
+#feed-div
+{
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 #news-table
