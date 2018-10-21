@@ -1,9 +1,18 @@
 header
 {
     width: 80%;
-    height: 5%;
-    margin-right: 10%;
+    height: 7.5%;
+    margin-right: 8%;
     margin-top: 7%;
+    background-color: white;
+    padding-top: 2px;
+    padding-right: 10px;
+}
+
+@font-face {
+    font-family: 'Bundy';
+    src: url('./bundy/bundaysans-bold-webfont.woff') format('woff'), /* Modern Browsers */
+    url('./bundy/bundaysans-bold-webfont.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 
 .header-icon
@@ -11,8 +20,18 @@ header
 	display: inline-block;
 	width: 10%;
     float: right;
-    margin-left: 10px;
-    margin-right: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+#map-icon
+{
+    background-color: #d8ffcc;
+}
+
+h1
+{
+    margin-top: 8px;
 }
 
 #logo
@@ -30,6 +49,13 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Bundy', Arial, sans-serif;
+}
+
+body
+{
+    background-color: #d8ffcc;
+    color: #4d2600;
 }
 
 .left-indent
