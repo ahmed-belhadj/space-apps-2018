@@ -1,13 +1,18 @@
 header
 {
-    width: 100%;
+    width: 80%;
     height: 5%;
+    margin-right: 10%;
+    margin-top: 7%;
 }
 
 .header-icon
 {
 	display: inline-block;
 	width: 10%;
+    float: right;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #logo
@@ -25,4 +30,9 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+.left-indent
+{
+    margin-left: 10%;
 }
